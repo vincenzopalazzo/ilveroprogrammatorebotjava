@@ -21,7 +21,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "243429243:AAFjSjMhcGzxGp6d2gqmlyvRhq2thLPSpTI";
+        return "token_bot";
     }
 
     @Override
@@ -51,9 +51,9 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
             if (update.getCallbackQuery().getData().equals("messaggio_info_sviluppo")) {
                 //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
                 Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
-                if(!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getUserName())){
+                if(!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getId())){
                     LOGGER.debug("Username non conosciuto: " +  update.getMessage().getChat().getUserName());
-                    utenti.getUtenti().add(update.getMessage().getChat().getUserName());
+                    utenti.getUtenti().add(update.getMessage().getChat().getId());
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
                 }
 
@@ -75,9 +75,9 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 LOGGER.debug("Ho riceviuto cosa_so_fare");
                 //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
                 Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
-                if(!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getUserName())){
+                if(!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getId())){
                     LOGGER.debug("Username non conosciuto: " +  update.getMessage().getChat().getUserName());
-                    utenti.getUtenti().add(update.getMessage().getChat().getUserName());
+                    utenti.getUtenti().add(update.getMessage().getChat().getId());
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
                 }
             }
@@ -87,28 +87,13 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
             //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
             Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
-            if(!utenti.isConteins(update.getMessage().getChat().getUserName())){
+            if(!utenti.isConteins(update.getMessage().getChat().getId())){
                 LOGGER.debug("Username non conosciuto: " +  update.getMessage().getChat().getUserName());
-                utenti.getUtenti().add(update.getMessage().getChat().getUserName());
+                utenti.getUtenti().add(update.getMessage().getChat().getId());
                 Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
             }
-
-            LOGGER.debug("e' un messagio normale");
-            if(update.getMessage().getText().equals("/hey") || update.getMessage().getText().equals("/hey@ilVeroProgrammatore_bot")) {
-                LOGGER.debug("Ha comuniocato con un comando /");
-                SendMessage message = new SendMessage();
-
-                message.setChatId(update.getMessage().getChat().getId());
-                String messaggio = "Ciao, per chidermi quali sono i miei comandi all'interno di un gruppo chiedimi " +
-                        "Ciao @IlVeroProgrammatore_bot cosa sai fare?, oppure basta semplicemente un Ciao @IlVeroProgrammatore_bot";
-                message.setText(messaggio);
-                try {
-                    execute(message);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                } finally {
-                    return;
-                }
+            if(messaggioPresentazione(update)){
+                return;
             }
             if (update.getMessage().getChat().isUserChat()) {
                 LOGGER.debug("Sto comunicando con un utente");
@@ -117,7 +102,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 message.setReplyMarkup(tastiera);
 
                 message.setChatId(update.getMessage().getChatId());
-                String messaggio = "Ciao " + update.getMessage().getChat().getFirstName() + ", mi spiace la tua foto, come stai?";
+                String messaggio = "Ciao " + update.getMessage().getChat().getFirstName() + ", mi piace la tua foto, come stai?";
                 message.setText(messaggio);
                 try {
                     execute(message);
@@ -146,7 +131,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
                     bottonis.clear();
                     bottoni = new ArrayList<>();
-                    bottoni.add(bottone);
+                    //bottoni.add(bottone);
                     bottone = new InlineKeyboardButton("Ancora nulla");
                     bottone.setCallbackData("cosa_so_fare");
                     bottoni.add(bottone);
@@ -166,6 +151,54 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 }
 
             }
+        }
+    }
+
+    private boolean messaggioPresentazione(Update update){
+        LOGGER.debug("e' un messagio normale");
+        if(update.getMessage().getText().equals("/hey") || update.getMessage().getText().equals("/hey@ilVeroProgrammatore_bot")) {
+            LOGGER.debug("Ha comuniocato con un comando /");
+            SendMessage message = new SendMessage();
+            message.setChatId(update.getMessage().getChat().getId());
+            String messaggio;
+            if(update.getMessage().getChat().isUserChat()){
+                messaggio = "Ciao, per chidermi quali sono i miei comandi all'interno di un gruppo chiedimi " +
+                        "Ciao @IlVeroProgrammatore_bot cosa sai fare?, oppure basta semplicemente un Ciao @IlVeroProgrammatore_bot." +
+                        "Oppure qui in privato con 'Ciao', se non so rispondere a qualcosa mio padre ha detto che riusciro' ad imparare";
+            }else if(update.getMessage().getChat().isGroupChat()){
+                messaggio = "Ciao, per chidermi quali sono i miei comandi all'interno di un gruppo chiedimi " +
+                        "Ciao @IlVeroProgrammatore_bot cosa sai fare?, oppure basta semplicemente un Ciao @IlVeroProgrammatore_bot.";
+            }else{
+                messaggio = "Non so rispondere a questo ripo di contenuto";
+            }
+            //TODO cercare un modo per far imparare le cose...
+            message.setText(messaggio);
+            try {
+                execute(message);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            } finally {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void messaggioBrodcast(String messaggio) {
+        Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
+        if(utenti != null){
+            for (Long chatId : utenti.getUtenti()){
+                SendMessage message = new SendMessage();
+                message.setChatId(chatId);
+                message.setText(messaggio);
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    LOGGER.error("Si e' verificato un errore del tipo: " + e.getLocalizedMessage());
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Ok messaggi mandati");
         }
     }
 }
