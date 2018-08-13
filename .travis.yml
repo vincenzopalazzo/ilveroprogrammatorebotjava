@@ -8,4 +8,4 @@ sudo: disable
 addons:
   apt:
     packages:
-      - oracle-java8-installer
+      - oracle-java7-installer
