@@ -4,7 +4,7 @@ jdk:
 before_install:
   - cd app
 script: mvn clean verify
-sudo: disable 
+sudo: enable 
 addons:
   apt:
     packages:
