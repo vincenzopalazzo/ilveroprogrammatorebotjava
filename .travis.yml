@@ -1,11 +1,10 @@
 language: java
 jdk:
+  - oraclejdk8
+  - oraclejdk9
   - openjdk8
 before_install:
   - cd app
 script: mvn clean verify
-sudo: enable 
-addons:
-  apt:
-    packages:
-      - oracle-java7-set-default
+sudo: disable 
+
