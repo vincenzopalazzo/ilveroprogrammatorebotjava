@@ -5,3 +5,7 @@ before_install:
   - cd app
 script: mvn clean verify
 sudo: disable 
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
