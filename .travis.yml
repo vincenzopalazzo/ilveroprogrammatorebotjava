@@ -3,5 +3,5 @@ jdk:
   - oraclejdk8
 before_install:
   - cd java
-ant test
+script: mvn clean verify
 sudo: disable 
