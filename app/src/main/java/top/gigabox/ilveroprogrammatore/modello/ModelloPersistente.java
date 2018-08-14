@@ -23,6 +23,10 @@ import top.gigabox.ilveroprogrammatore.persistenza.DAOException;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOGenericoJson;
 
 
+/**
+ * @author unibas
+ */
+
 public class ModelloPersistente {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ModelloPersistente.class);

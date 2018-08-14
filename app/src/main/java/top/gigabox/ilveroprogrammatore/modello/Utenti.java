@@ -3,6 +3,10 @@ package top.gigabox.ilveroprogrammatore.modello;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author https://github.com/vincenzopalazzo
+ */
+
 public class Utenti {
 
     private List<Long> utenti = new ArrayList<>();
