@@ -5,8 +5,6 @@ jdk:
   - oraclejdk9
 before_install:
   - cd app
-  - wget -P somewhere/ https://drive.google.com/uc?authuser=0&id=1e_9kzl4pM-suPaKigynICgHjsrOee_i6&export=download
-  - mvn validate
 script: mvn clean verify
 sudo: disable 
 
