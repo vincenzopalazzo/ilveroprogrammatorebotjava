@@ -11,12 +11,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.gigabox.ilveroprogrammatore.Bot;
 import top.gigabox.ilveroprogrammatore.Constanti;
-import top.gigabox.ilveroprogrammatore.persistenza.DAOFrasi;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static javafx.scene.input.KeyCode.F;
 
 /**
  * @author https://github.com/vincenzopalazzo
@@ -28,12 +25,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "Il tuo token";
+        return "Your token";
     }
 
     @Override
     public String getBotUsername() {
-        return "il tuo nome per il bot";
+        return "ilVeroProgrammatore_bot";
     }
 
     @Override
@@ -85,7 +82,6 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
                 Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
                 if (!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getId())) {
-                    LOGGER.debug("Username non conosciuto: " + update.getMessage().getChat().getUserName());
                     utenti.getUtenti().add(update.getMessage().getChat().getId());
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
                 }
@@ -108,7 +104,6 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
             //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
             Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
             if (!utenti.isConteins(update.getMessage().getChat().getId())) {
-                LOGGER.debug("Username non conosciuto: " + update.getMessage().getChat().getUserName());
                 utenti.getUtenti().add(update.getMessage().getChat().getId());
                 Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
             }
