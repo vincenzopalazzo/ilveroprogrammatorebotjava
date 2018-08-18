@@ -39,6 +39,11 @@ public class Bot {
     private Archivio archivio = new Archivio();
     private StatusGenerazione statusGenerazione = new StatusGenerazione();
     private Modello modello = new Modello();
+    private Operatore operatore = new Operatore();
+
+    public Operatore getOperatore() {
+        return operatore;
+    }
 
     public Modello getModello() {
         return modello;
@@ -49,6 +54,7 @@ public class Bot {
     }
 
     public Archivio getArchivio() {
+        archivio = (Archivio) modelloPersistente.getPersistentBean(Constanti.ARCHIVIO, Archivio.class);
         return archivio;
     }
 
@@ -94,6 +100,7 @@ public class Bot {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         BotSession botSession = null;
         IlVeroProgrammatoreBot bot = new IlVeroProgrammatoreBot();
+
         try {
             botSession = telegramBotsApi.registerBot(bot);
         } catch (Exception e) {

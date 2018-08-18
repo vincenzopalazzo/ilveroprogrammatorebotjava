@@ -8,7 +8,23 @@
     </encoder>
   </appender>
 
-  <root level="debug">
+  <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!-- use the previously created timestamp to create a uniquely
+         named log file -->
+    <file>log-${bySecond}.txt</file>
+    <encoder>
+      <pattern>%logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="info">
     <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
   </root>
+
+  <logger name="top.gigabox.ilveroprogrammatore.modello" level="info"/>
+  <logger name="top.gigabox.ilveroprogrammatore.persistenza" level="debug"/>
+  <logger name="top.gigabox.ilveroprogrammatore" level="info"/>
 </configuration>

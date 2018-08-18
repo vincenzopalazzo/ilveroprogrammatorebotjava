@@ -13,6 +13,7 @@ import com.google.gson.JsonSerializer;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,7 +69,9 @@ public class DAOGenericoJson {
     public void salva(Object oggetto, String out) throws DAOException {
         PrintWriter flusso = null;
         try {
-            flusso = new java.io.PrintWriter(out);
+            //TODO non so se funziona
+            flusso = new java.io.PrintWriter(new OutputStreamWriter(new FileOutputStream(out), StandardCharsets.UTF_8));
+           // flusso = new java.io.PrintWriter(out);
             String stringaJson = toJson(oggetto);
             flusso.print(stringaJson);
         } catch (Exception ioe) {
