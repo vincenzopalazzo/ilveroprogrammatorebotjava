@@ -1,3 +1,7 @@
+![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master).
+         
+
+
 ![Screenshot](https://i.imgur.com/ZjsraPY.jpg)
 
 # ilveroprogrammatorebotjava
@@ -10,4 +14,4 @@ Added possibility to send broadcast messages with the bot through idChat (not vi
 Unresolved problem with the log, only the ERROR level works.
 README.MG update.
 
-Come and try me on telegram: [![TelegramBot telegram](https://i.imgur.com/l0YwOtM.png)](https://t.me/ilVeroProgrammatore_bot)
+Come and try me on telegram: [![TelegramBot telegram](https://i.imgur.com/l0YwOtM.png)](https://t.me/ilVeroProgrammatore_bot).

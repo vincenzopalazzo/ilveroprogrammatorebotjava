@@ -11,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.gigabox.ilveroprogrammatore.Bot;
 import top.gigabox.ilveroprogrammatore.Constanti;
+import top.gigabox.ilveroprogrammatore.persistenza.DAOFrasi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +28,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "243429243:AAFjSjMhcGzxGp6d2gqmlyvRhq2thLPSpTI";
+        return "Il tuo token";
     }
 
     @Override
     public String getBotUsername() {
-        return "ilVeroProgrammatore_bot";
+        return "il tuo nome per il bot";
     }
 
     @Override
@@ -258,7 +259,9 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
     }
 
     private void generaFrase(SendMessage message) {
-        Frase fraseGenerata = Bot.getIstance().getArchivio().getFrasi().get(0);
+        //Generazione frasi
+        Frase fraseGenerata = Bot.getIstance().getOperatore().generaFrase();
+
         message.setText(fraseGenerata.getFrase());
         StatusGenerazione statusGenerazione = (StatusGenerazione) Bot.getIstance().getModello().getBean(Constanti.STATO);
         statusGenerazione.putFrase(message.getChatId(), fraseGenerata);
@@ -288,11 +291,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 if (update.getCallbackQuery().getData().equals("add_voto_plus")){
                     LOGGER.debug("Registro un voto positivo");
                     frase.setVotoPos(frase.getVotoPos() + 1);
-
+                    Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
                 }
                 if (update.getCallbackQuery().getData().equals("add_voto_minus")){
                     LOGGER.debug("Registro un voto negativo");
-                    frase.setVotoPos(frase.getVotoNeg() + 1);
+                    frase.setVotoNeg(frase.getVotoNeg() + 1);
+                    Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
                 }
                 SendMessage message = new SendMessage();
                 message.setText("Grazie per aver lasciato il feed sulla frase");
@@ -305,9 +309,10 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
-            LOGGER.debug("Nella lista delle frasi i voto sono, +: " + Bot.getIstance().getArchivio().getFrasi().get(0). getVotoPos()
-                    + " -: " + Bot.getIstance().getArchivio().getFrasi().get(0). getVotoNeg());
-            //TODO quando carico devo sempre caricare i dati piu recenti dall'archivio el getArchvio di bot.
+            Archivio archivio = (Archivio) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.ARCHIVIO, Archivio.class);
+            LOGGER.debug("Nella lista delle frasi i voto sono, +: " + archivio.getFrasi().get(0).getVotoPos()
+                    + " -: " + archivio.getFrasi().get(0).getVotoNeg());
+            //TODO quando carico devo sempre caricare i dati piu recenti dall'archivio nel getArchvio di bot. (Da debuggare)
             Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
         }
     }
