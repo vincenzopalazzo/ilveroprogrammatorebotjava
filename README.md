@@ -51,5 +51,5 @@ See also the list of [contributors](https://github.com/vincenzopalazzo/ilveropro
 * etc
 
 
-## Screen
+## WIKI
 [take a look at the wiki](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/wiki) 
