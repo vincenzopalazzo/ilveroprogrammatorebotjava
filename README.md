@@ -1,17 +1,57 @@
 ![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master).
-         
+# Il vero programmatore bot 
 
-
-![Screenshot](https://i.imgur.com/ZjsraPY.jpg)
-
-# ilveroprogrammatorebotjava
 This bot is a bot for telegrams and is meant to be a collection of phrases/images for programmers, like a spacobot but for programmers.
 
-## Features
-Added possibility to block the bot with a small server-side graphical interface.
-Obscure bot token in source code for github users (avoid hot head problems).
-Added possibility to send broadcast messages with the bot through idChat (not violet privacy GDPR, because id chat is not a sensitive data)
-Unresolved problem with the log, only the ERROR level works.
-README.MG update.
+## Getting Started
 
+To start using my bot just go to the telegram and look for the @ilVeroProgrammatore_bot bot.
+Instead if you want to use my architecture to create your bot you must know that I use the following frameworks
+
+The loggin system was initially SLF4J with logback but with bugs introduced and not found yet during development, we opted to use log4j, the configuration file and log4j.properties passed as command line information to the main and therefore customizable as you want ... I'll place mine
+
+### Installing
+
+To launch the application by activating the log system, tear the following commandm
+
+```
+java -jar app-1.0-jar-with-dependencies.jar /position/file/onDirectory/log4j.properties
+```
+
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Utilta]() - Framework for using the console in an enhanced way (input control) for creating the interface from the server-side command line
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [Gson](https://github.com/google/gson) - Framework for the use of json technology where I do operations on sentences that uses the bot in which also save idChat (non-sensitive data where it respects the GDPR policy) for broadcast messages
+* [Jsoup](https://github.com/jhy/jsoup) - Framework for parsing html files, allowed me to easily pick up all the phrases that contain the site .....
+* [Emoji-java](https://github.com/vdurmont/emoji-java) - Introduces the emoji into java transforming them into a string
+* [Telegrambots](https://github.com/rubenlagus/TelegramBots) - Framework for creating bots for telegrams
+* [Log4j](https://github.com/apache/log4j) - Framework for creating bots for telegrams
+
+## Contributing
+
+## Versioning
+
+For the versions available, see the [tags on this repository](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/releases). 
+
+## Authors
+
+* **Palazzo Vincenzo** - *Initial work* - [Palazzo Vincenzo](https://github.com/vincenzopalazzo)
+
+See also the list of [contributors](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/graphs/contributors) who participated in this project.
+
+## License
+
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
+
+## Try
 Come and try me on telegram: [![TelegramBot telegram](https://i.imgur.com/l0YwOtM.png)](https://t.me/ilVeroProgrammatore_bot).
+
+## Screen app
