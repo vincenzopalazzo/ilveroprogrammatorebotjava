@@ -1,14 +1,14 @@
 package top.gigabox.ilveroprogrammatore.modello;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import top.gigabox.ilveroprogrammatore.Bot;
 
 import java.util.Random;
 
 public class Operatore {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Operatore.class);
+    private static final Logger LOGGER = LogManager.getLogger(Operatore.class);
 
     public Frase generaFrase(){
         Archivio archivio = Bot.getIstance().getArchivio();

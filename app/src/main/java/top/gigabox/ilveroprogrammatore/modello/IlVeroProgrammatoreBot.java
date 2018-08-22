@@ -1,8 +1,8 @@
 package top.gigabox.ilveroprogrammatore.modello;
 
 import com.vdurmont.emoji.EmojiParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -21,11 +21,11 @@ import java.util.List;
 
 public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IlVeroProgrammatoreBot.class);
+    private static final Logger LOGGER = Logger.getLogger(IlVeroProgrammatoreBot.class);
 
     @Override
     public String getBotToken() {
-        return "Your token";
+        return "243429243:AAFjSjMhcGzxGp6d2gqmlyvRhq2thLPSpTI";
     }
 
     @Override
@@ -58,7 +58,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
                 Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
                 if (!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getId())) {
-                    LOGGER.debug("Username non conosciuto: " + update.getMessage().getChat().getUserName());
+                    LOGGER.info("Username non conosciuto: " + update.getMessage().getChat().getUserName());
                     utenti.getUtenti().add(update.getMessage().getChat().getId());
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.UTENTI, utenti);
                 }
@@ -67,18 +67,18 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
                 String messaggio = "Ciao sto riscrivendo il mio bot in java, Ho bisogno solo di un po di tempo!" +
                         " Per maggiori info puoi contattarmi qui @crazyjoker96";
-                LOGGER.debug("Sto inviando il seguente messaggio: " + messaggio);
+                LOGGER.info("Sto inviando il seguente messaggio: " + messaggio);
                 sendMessage.setText(messaggio);
 
                 try {
                     execute(sendMessage);
                 } catch (TelegramApiException e) {
-                    LOGGER.debug("Si e' verificato il seguente errore: " + e.getLocalizedMessage());
+                    LOGGER.info("Si e' verificato il seguente errore: " + e.getLocalizedMessage());
                     e.printStackTrace();
                 }
             }
             if (update.getCallbackQuery().getData().equals("cosa_so_fare")) {
-                LOGGER.debug("Ho riceviuto cosa_so_fare");
+                LOGGER.info("Ho riceviuto cosa_so_fare");
                 //Verifico la presenza dell username e in caso contrario la salvo per notificare aggiornamenti in futuro.
                 Utenti utenti = (Utenti) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.UTENTI, Utenti.class);
                 if (!utenti.isConteins(update.getCallbackQuery().getMessage().getChat().getId())) {
@@ -95,7 +95,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
-            if(update.getCallbackQuery().getData().equals("add_voto_minus") || update.getCallbackQuery().getData().equals("add_voto_plus") ){
+            if (update.getCallbackQuery().getData().equals("add_voto_minus") || update.getCallbackQuery().getData().equals("add_voto_plus")) {
                 generaVotazione(update);
             }
         }
@@ -113,28 +113,28 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 SendMessage message = new SendMessage();
                 String messaggio = new String();
                 if (update.getMessage().hasAnimation()) {
-                    LOGGER.debug("Il bot ha ricevuto un animazione");
+                    LOGGER.info("Il bot ha ricevuto un animazione");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasContact()) {
-                    LOGGER.debug("Il bot ha ricevuto un contatto");
+                    LOGGER.info("Il bot ha ricevuto un contatto");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasDocument()) {
-                    LOGGER.debug("Il bot ha ricevuto un documento");
+                    LOGGER.info("Il bot ha ricevuto un documento");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasLocation()) {
-                    LOGGER.debug("Il bot ha ricevuto una localita");
+                    LOGGER.info("Il bot ha ricevuto una localita");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasPhoto()) {
-                    LOGGER.debug("Il bot ha ricevuto una foto");
+                    LOGGER.info("Il bot ha ricevuto una foto");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasSticker()) {
-                    LOGGER.debug("Il bot ha ricevuto uno stikers");
+                    LOGGER.info("Il bot ha ricevuto uno stikers");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasVideo()) {
-                    LOGGER.debug("Il bot ha ricevuto un video");
+                    LOGGER.info("Il bot ha ricevuto un video");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasVideoNote()) {
-                    LOGGER.debug("Il bot ha ricevuto una nota video");
+                    LOGGER.info("Il bot ha ricevuto una nota video");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasText()) {
                     //TODO Fattorizzare questo codice
@@ -160,44 +160,58 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
             } else if (update.getMessage().getChat().isGroupChat()) {
                 SendMessage message = new SendMessage();
                 String messaggio = new String();
+                //Il messaggio arriva da un comando invocato con il tasto /
+                if(isComandoBot(update.getMessage().getText())){
+                    messaggio = "Ciao, mi hai chiamanto usando i comandi del bot che iniziano per /qualcosa, mio padre pensa che sia una funzione un po" +
+                            "vecchia e quinid mi ha istruito a rispondere attraverso messaggi naturali.\n" +
+                            "Ora se sei in un gruppo prova a scrivere 'Ciao @ilVeroProgrammatore_bot' e io ti rispondero'.\n " +
+                            "Altrimenti se sei in una chat privata puoi evitare il @ilVeroProgrammatore_bot e puoi rivolgerti a me direttamente " +
+                            "con quello che ti pare. " + EmojiParser.parseToUnicode(":black_joker:");
+                    sentMessage(messaggio, update.getMessage().getChat().getId());
+                    return;
+                }
+
+                //Il messaggio non e' per il bot
+                if (!update.getMessage().getText().contains("@ilVeroProgrammatore_bot")) {
+                    LOGGER.info("Non e' un messaggio pre il bot");
+                    return;
+                }
                 if (update.getMessage().hasAnimation()) {
-                    LOGGER.debug("Il bot ha ricevuto un animazione");
+                    LOGGER.info("Il bot ha ricevuto un animazione");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasContact()) {
-                    LOGGER.debug("Il bot ha ricevuto un contatto");
+                    LOGGER.info("Il bot ha ricevuto un contatto");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasDocument()) {
-                    LOGGER.debug("Il bot ha ricevuto un documento");
+                    LOGGER.info("Il bot ha ricevuto un documento");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasLocation()) {
-                    LOGGER.debug("Il bot ha ricevuto una localita");
+                    LOGGER.info("Il bot ha ricevuto una localita");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasPhoto()) {
-                    LOGGER.debug("Il bot ha ricevuto una foto");
+                    LOGGER.info("Il bot ha ricevuto una foto");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasSticker()) {
-                    LOGGER.debug("Il bot ha ricevuto uno stikers");
+                    LOGGER.info("Il bot ha ricevuto uno stikers");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasVideo()) {
-                    LOGGER.debug("Il bot ha ricevuto un video");
+                    LOGGER.info("Il bot ha ricevuto un video");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasVideoNote()) {
-                    LOGGER.debug("Il bot ha ricevuto una nota video");
+                    LOGGER.info("Il bot ha ricevuto una nota video");
                     messaggio = "Non so rispondere a questo tipo di formato file";
                 } else if (update.getMessage().hasText()) {
                     //TODO Fattorizzare questo codice
-                    LOGGER.debug("Sto comunicando con un gruppo");
-                    if (update.getMessage().getText().contains("@ilVeroProgrammatore_bot")) {
-                        message.setReplyMarkup(tastiera);
+                    LOGGER.info("Sto comunicando con un gruppo");
+                    message.setReplyMarkup(tastiera);
 
-                        message.setChatId(update.getMessage().getChat().getId());
-                        messaggio = "Ehy ciao Ragazzi, sono felice di stare in questo nuovo gruppo";
-                        message.setText(messaggio);
-                        try {
-                            execute(message);
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
+                    message.setChatId(update.getMessage().getChat().getId());
+                    messaggio = "Ehy ciao Ragazzi, sono felice di stare in questo nuovo gruppo";
+                    message.setText(messaggio);
+                    try {
+                        execute(message);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
                     }
                     //messaggio = "Come va? ti riassumo molto brevemente cosa so fare cosi puoi decidere se ti sono utile";
                     // generaMessaggioPresentazioneCompetenze(message, bottonis, bottoni, tastiera, bottone, messaggio, update);
@@ -229,6 +243,28 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 }
             }
         }
+    }
+
+    private void sentMessage(String messaggio, Long chatId) {
+        SendMessage message = new SendMessage();
+        try {
+            message.setText(messaggio);
+            message.setChatId(chatId);
+            execute(message);
+        }catch (TelegramApiException tae){
+            LOGGER.error("Si e' verificato un errore del tipo: " + tae.getLocalizedMessage());
+            tae.printStackTrace();
+        }
+    }
+
+    private boolean isComandoBot(String text) {
+        if(text.trim().equals("/hey@ilVeroProgrammatore_bot")){
+            return true;
+        }
+        if(text.trim().equals("/hey")){
+            return true;
+        }
+        return false;
     }
 
     private void generaMessaggioPresentazioneCompetenze(SendMessage message, List<List<InlineKeyboardButton>> bottonis,
@@ -275,21 +311,21 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
         message.setReplyMarkup(tastieraFeed);
     }
 
-    private void generaVotazione(Update update){
+    private void generaVotazione(Update update) {
         Long id = update.getCallbackQuery().getMessage().getChatId();
         String chatId = String.valueOf(id);
         StatusGenerazione statusGenerazione = (StatusGenerazione) Bot.getIstance().getModello().getBean(Constanti.STATO);
-        if(statusGenerazione != null){
-            if(statusGenerazione.getFrasiUtenti().containsKey(chatId)){
-                LOGGER.debug("Contiene l'id chat");
+        if (statusGenerazione != null) {
+            if (statusGenerazione.getFrasiUtenti().containsKey(chatId)) {
+                LOGGER.info("Contiene l'id chat");
                 Frase frase = statusGenerazione.getFresi(chatId);
-                if (update.getCallbackQuery().getData().equals("add_voto_plus")){
-                    LOGGER.debug("Registro un voto positivo");
+                if (update.getCallbackQuery().getData().equals("add_voto_plus")) {
+                    LOGGER.info("Registro un voto positivo");
                     frase.setVotoPos(frase.getVotoPos() + 1);
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
                 }
-                if (update.getCallbackQuery().getData().equals("add_voto_minus")){
-                    LOGGER.debug("Registro un voto negativo");
+                if (update.getCallbackQuery().getData().equals("add_voto_minus")) {
+                    LOGGER.info("Registro un voto negativo");
                     frase.setVotoNeg(frase.getVotoNeg() + 1);
                     Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
                 }
@@ -305,7 +341,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 }
             }
             Archivio archivio = (Archivio) Bot.getIstance().getModelloPersistente().getPersistentBean(Constanti.ARCHIVIO, Archivio.class);
-            LOGGER.debug("Nella lista delle frasi i voto sono, +: " + archivio.getFrasi().get(0).getVotoPos()
+            LOGGER.info("Nella lista delle frasi i voto sono, +: " + archivio.getFrasi().get(0).getVotoPos()
                     + " -: " + archivio.getFrasi().get(0).getVotoNeg());
             //TODO quando carico devo sempre caricare i dati piu recenti dall'archivio nel getArchvio di bot. (Da debuggare)
             Bot.getIstance().getModelloPersistente().saveBean(Constanti.ARCHIVIO, Bot.getIstance().getArchivio());
@@ -313,9 +349,9 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
     }
 
     private boolean messaggioPresentazione(Update update) {
-        LOGGER.debug("e' un messagio normale, messaggioPresentazione");
+        LOGGER.info("e' un messagio normale, messaggioPresentazione");
         if (update.getMessage().getText().equals("/hey") || update.getMessage().getText().equals("/hey@ilVeroProgrammatore_bot")) {
-            LOGGER.debug("Ha comuniocato con un comando /");
+            LOGGER.info("Ha comuniocato con un comando /");
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChat().getId());
             String messaggio;
@@ -334,6 +370,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
             try {
                 execute(message);
             } catch (TelegramApiException e) {
+                LOGGER.error("Si e' verificato un errore del tipo: " + e.getLocalizedMessage());
                 e.printStackTrace();
             } finally {
                 return true;

@@ -1,21 +1,16 @@
 package top.gigabox.ilveroprogrammatore;
 
-
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.core.util.StatusPrinter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.generics.BotSession;
 import top.gigabox.ilveroprogrammatore.modello.*;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOFrasi;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOGenericoJson;
-
-import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,14 +18,13 @@ import java.util.List;
  */
 public class Bot {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
+    private static final Logger LOGGER = Logger.getLogger(Bot.class);
 
     private static final Bot singleton = new Bot();
 
     public static Bot getIstance() {
         return singleton;
     }
-
 
     private DAOGenericoJson daoGenericoJson = new DAOGenericoJson();
     private ModelloPersistente modelloPersistente = new ModelloPersistente();
@@ -67,19 +61,22 @@ public class Bot {
     }
 
     public static void main(String[] args) {
-        LOGGER.error("Attivazione Server");
 
-        if(LOGGER.isTraceEnabled()){
+        PropertyConfigurator.configure(args[0]);
+
+        LOGGER.info("Attivazione Server");
+       /* boolean abilitaDebugDelLogger = true;
+        if(LOGGER.isTraceEnabled() || abilitaDebugDelLogger){
             /**It allows to print the current setting taken from the logback
-             used to correct the bug on the log**/
+             used to correct the bug on the log
             ch.qos.logback.classic.LoggerContext context = (LoggerContext)LoggerFactory.getILoggerFactory();
             StatusPrinter.print(context);
-        }
+        } */
 
 
         //Cro la direcrory per il resto
         if(!singleton.creaDirectory()){
-            LOGGER.debug("Cartella non creata, controlla se il percorso e' giusto ed ha i permessi necessari.");
+            LOGGER.info("Cartella non creata, controlla se il percorso e' giusto ed ha i permessi necessari.");
             return;
         }
 
@@ -89,7 +86,7 @@ public class Bot {
         }
 
         if(singleton.getModelloPersistente().getPersistentBean(Constanti.ARCHIVIO, Archivio.class) != null){
-            LOGGER.debug("Frasi gia' presenti le carico dal file");
+            LOGGER.info("Frasi gia' presenti le carico dal file");
             singleton.archivio = (Archivio) singleton.getModelloPersistente().getPersistentBean(Constanti.ARCHIVIO, Archivio.class);
         }
 
@@ -148,10 +145,10 @@ public class Bot {
             if(scelta == 3){
                 List<Frase> frasi = new ArrayList<>();
                 frasi = daoFrasi.load("non serve a nulla");
-                LOGGER.debug("numero di frasi caricate: " + frasi.size());
+                LOGGER.info("numero di frasi caricate: " + frasi.size());
                 archivio.setFrasi(frasi);
                 singleton.getModelloPersistente().saveBean(Constanti.ARCHIVIO, archivio);
-                LOGGER.debug("Dovrebbe essere andato tutto liscio");
+                LOGGER.info("Dovrebbe essere andato tutto liscio");
             }
         }
     }
@@ -177,7 +174,7 @@ public class Bot {
     private boolean creaDirectory() {
         File dir = new File(Constanti.PERCORSO_DIRECTORY_DATI);
         if(dir.exists()){
-            LOGGER.debug("Carterlla esistente, bene");
+            LOGGER.info("Carterlla esistente, bene");
             return true;
         }
         return dir.mkdir();
