@@ -25,7 +25,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "243429243:AAFjSjMhcGzxGp6d2gqmlyvRhq2thLPSpTI";
+        return "Your Token";
     }
 
     @Override
