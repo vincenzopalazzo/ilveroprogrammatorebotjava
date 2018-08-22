@@ -22,7 +22,7 @@ java -jar app-1.0-jar-with-dependencies.jar /position/file/onDirectory/log4j.pro
 ## Built With
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Utilta]() - Framework for using the console in an enhanced way (input control) for creating the interface from the server-side command line
+* [Utilta](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/blob/master/app/src/lib/utilita.jar) - Framework for using the console in an enhanced way (input control) for creating the interface from the server-side command line
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Gson](https://github.com/google/gson) - Framework for the use of json technology where I do operations on sentences that uses the bot in which also save idChat (non-sensitive data where it respects the GDPR policy) for broadcast messages
 * [Jsoup](https://github.com/jhy/jsoup) - Framework for parsing html files, allowed me to easily pick up all the phrases that contain the site .....
