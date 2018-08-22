@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Constanti {
     //TODO Gestire meglio i percorsi, generallizarli sopratutto
-    public static final String PERCORSO_DIRECTORY_DATI = "/home/vincenzo/dati/";
+    public static final String PERCORSO_DIRECTORY_DATI = "/home/pi/dati/";
     public static final String BOT_SESSION = PERCORSO_DIRECTORY_DATI + "bootSession.json";
     public static final String SAVE_MODEL = PERCORSO_DIRECTORY_DATI;
     //public static final String SAVE_ARCHIVIE = PERCORSO_DIRECTORY_DATI + "/archivio.json";
