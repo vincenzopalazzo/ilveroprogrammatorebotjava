@@ -1,12 +1,10 @@
 package top.gigabox.ilveroprogrammatore.persistenza;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import top.gigabox.ilveroprogrammatore.modello.Frase;
 
 
@@ -18,7 +16,7 @@ import java.util.Map;
 
 public class DAOFrasi implements IDAOFrasi{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DAOFrasi.class);
+    private static final Logger LOGGER = LogManager.getLogger(DAOFrasi.class);
 
     @Override
     public List<Frase> load(String nomeFile) throws DAOException {

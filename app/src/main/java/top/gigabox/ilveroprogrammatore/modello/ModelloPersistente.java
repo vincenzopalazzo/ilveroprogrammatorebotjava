@@ -16,8 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import top.gigabox.ilveroprogrammatore.*;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOException;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOGenericoJson;
@@ -29,7 +30,8 @@ import top.gigabox.ilveroprogrammatore.persistenza.DAOGenericoJson;
 
 public class ModelloPersistente {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ModelloPersistente.class);
+    private final static Logger LOGGER = LogManager.getLogger(ModelloPersistente.class);
+
     private final DAOGenericoJson daoGenericoJson = new DAOGenericoJson();
     private final Map<String, Object> cache = new HashMap<String, Object>();
 
