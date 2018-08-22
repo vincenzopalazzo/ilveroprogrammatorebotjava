@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master).
+![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master). [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/ilVeroProgrammatore_bot)
 # Il vero programmatore bot 
 
 This bot is a bot for telegrams and is meant to be a collection of phrases/images for programmers, like a spacobot but for programmers.
@@ -21,7 +21,6 @@ java -jar app-1.0-jar-with-dependencies.jar /position/file/onDirectory/log4j.pro
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Utilta](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/blob/master/app/src/lib/utilita.jar) - Framework for using the console in an enhanced way (input control) for creating the interface from the server-side command line
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Gson](https://github.com/google/gson) - Framework for the use of json technology where I do operations on sentences that uses the bot in which also save idChat (non-sensitive data where it respects the GDPR policy) for broadcast messages
@@ -51,7 +50,6 @@ See also the list of [contributors](https://github.com/vincenzopalazzo/ilveropro
 * Inspiration
 * etc
 
-## Try
-Come and try me on telegram: [![TelegramBot telegram](https://i.imgur.com/l0YwOtM.png)](https://t.me/ilVeroProgrammatore_bot).
 
-## Screen app
+## Screen
+![alt text](https://ibb.co/n7P55z) ![alt text](https://ibb.co/gKd9Xe)
