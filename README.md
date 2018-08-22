@@ -52,4 +52,4 @@ See also the list of [contributors](https://github.com/vincenzopalazzo/ilveropro
 
 
 ## Screen
-![alt text](https://ibb.co/n7P55z) ![alt text](https://ibb.co/gKd9Xe)
+[take a look at the wiki](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/wiki) 
