@@ -8,7 +8,7 @@ This bot is a bot for telegrams and is meant to be a collection of phrases/image
 To start using my bot just go to the telegram and look for the @ilVeroProgrammatore_bot bot.
 Instead if you want to use my architecture to create your bot you must know that I use the following frameworks
 
-The loggin system was initially SLF4J with logback but with bugs introduced and not found yet during development, we opted to use log4j, the configuration file and log4j.properties passed as command line information to the main and therefore customizable as you want ... I'll place mine
+The loggin system was initially SLF4J with logback but with bugs introduced and not found yet during development, we opted to use log4j, the configuration file and log4j.properties passed as command line information to the main and therefore customizable as you want [il vero programmatore](http://xmau.com/humour/veroprogrammatore.html) I'll place mine
 
 ### Installing
 
@@ -27,7 +27,7 @@ java -jar app-1.0-jar-with-dependencies.jar /position/file/onDirectory/log4j.pro
 * [Jsoup](https://github.com/jhy/jsoup) - Framework for parsing html files, allowed me to easily pick up all the phrases that contain the site .....
 * [Emoji-java](https://github.com/vdurmont/emoji-java) - Introduces the emoji into java transforming them into a string
 * [Telegrambots](https://github.com/rubenlagus/TelegramBots) - Framework for creating bots for telegrams
-* [Log4j](https://github.com/apache/log4j) - Framework for creating bots for telegrams
+* [Log4j](https://github.com/apache/log4j) - Framework for loggin sistem
 
 ## Contributing
 
@@ -42,7 +42,7 @@ For the versions available, see the [tags on this repository](https://github.com
 See also the list of [contributors](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/graphs/contributors) who participated in this project.
 
 ## License
-
+[MIT](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/blob/master/LICENSE.md)
 
 ## Acknowledgments
 
