@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/vincenzopalazzo/ilveroprogrammatorebotjava/badge.svg?branch=master)](https://coveralls.io/github/vincenzopalazzo/ilveroprogrammatorebotjava?branch=master) [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/ilVeroProgrammatore_bot)
+![Build Status](https://travis-ci.org/vincenzopalazzo/ilveroprogrammatorebotjava.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/vincenzopalazzo/ilveroprogrammatorebotjava/badge.svg?branch=master)](https://coveralls.io/github/vincenzopalazzo/ilveroprogrammatorebotjava?branch=master) [![Telegram](http://trellobot.doomdns.org/telegrambadge.svg)](https://t.me/ilVeroProgrammatore_bot) [![License Info](http://img.shields.io/badge/license-The%20MIT%20License-brightgreen.svg)](https://github.com/vincenzopalazzo/ilveroprogrammatorebotjava/blob/master/LICENSE.md)
 # Il vero programmatore bot 
 
 This bot is a bot for telegrams and is meant to be a collection of phrases/images for programmers, like a spacobot but for programmers.
