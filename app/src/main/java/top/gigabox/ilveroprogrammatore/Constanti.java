@@ -31,6 +31,10 @@ public class Constanti {
     public static final String ARCHIVIO = "ARCHIVIO";
     public static final String STATO = "STATO";
 
+    //Setting Bot
+    public static final String NOME_BOT = "ilVeroProgrammatore_bot";
+    public static final String TOKEN_BOT = "Your_Token_Bot";
+
 
     //Arrai contenente caratteri supportati dal bot
 }

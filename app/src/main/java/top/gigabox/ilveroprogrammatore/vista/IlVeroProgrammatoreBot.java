@@ -13,7 +13,7 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package top.gigabox.ilveroprogrammatore.modello;
+package top.gigabox.ilveroprogrammatore.vista;
 
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.log4j.Logger;
@@ -25,6 +25,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.gigabox.ilveroprogrammatore.Bot;
 import top.gigabox.ilveroprogrammatore.Constanti;
+import top.gigabox.ilveroprogrammatore.modello.Archivio;
+import top.gigabox.ilveroprogrammatore.modello.Frase;
+import top.gigabox.ilveroprogrammatore.modello.StatusGenerazione;
+import top.gigabox.ilveroprogrammatore.modello.Utenti;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +43,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "Your Token";
+        return Constanti.TOKEN_BOT;
     }
 
     @Override
     public String getBotUsername() {
-        return "ilVeroProgrammatore_bot";
+        return Constanti.NOME_BOT;
     }
 
     @Override
@@ -163,6 +167,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 message.setText(messaggio);
                 try {
                     execute(message);
+                    message.getReplyMarkup().validate();
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
