@@ -32,7 +32,6 @@ import top.gigabox.ilveroprogrammatore.modello.Utenti;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author https://github.com/vincenzopalazzo
  */
@@ -53,7 +52,6 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-
         //Creazione tastiera
         InlineKeyboardMarkup tastiera = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> bottonis = new ArrayList<>();
@@ -171,11 +169,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-                /*try {
-                    execute(message);
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }*/
+
             } else if (update.getMessage().getChat().isGroupChat()) {
                 SendMessage message = new SendMessage();
                 String messaggio = new String();
