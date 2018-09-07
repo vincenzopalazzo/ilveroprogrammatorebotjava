@@ -1,10 +1,10 @@
+/home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/vista/IlVeroProgrammatoreBot.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/persistenza/DAOGenericoJson.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/persistenza/IDAOFrasi.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/Constanti.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/persistenza/DAOFrasi.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/modello/Utenti.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/Bot.java
-/home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/modello/IlVeroProgrammatoreBot.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/modello/Modello.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/modello/ModelloPersistente.java
 /home/vincenzo/Github/ilveroprogrammatorebotjava/app/src/main/java/top/gigabox/ilveroprogrammatore/persistenza/DAOException.java

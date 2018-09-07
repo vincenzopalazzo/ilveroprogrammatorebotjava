@@ -18,6 +18,7 @@ package top.gigabox.ilveroprogrammatore.vista;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -86,8 +87,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 LOGGER.info("Sto inviando il seguente messaggio: " + messaggio);
                 sendMessage.setText(messaggio);
 
+                AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery();
+                answerCallbackQuery.setCallbackQueryId(update.getCallbackQuery().getId());
+
                 try {
                     execute(sendMessage);
+                    execute(answerCallbackQuery);
                 } catch (TelegramApiException e) {
                     LOGGER.info("Si e' verificato il seguente errore: " + e.getLocalizedMessage());
                     e.printStackTrace();
@@ -104,8 +109,13 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 SendMessage sendMessage = new SendMessage();
                 sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
                 generaFrase(sendMessage);
+
+                AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery();
+                answerCallbackQuery.setCallbackQueryId(update.getCallbackQuery().getId());
+
                 try {
                     execute(sendMessage);
+                    execute(answerCallbackQuery);
                 } catch (TelegramApiException e) {
                     LOGGER.debug("Si e' verificato il seguente errore: " + e.getLocalizedMessage());
                     e.printStackTrace();
@@ -346,8 +356,12 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 message.setText("Grazie per aver lasciato il feed sulla frase");
                 message.setChatId(update.getCallbackQuery().getMessage().getChatId());
 
+                AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery();
+                answerCallbackQuery.setCallbackQueryId(update.getCallbackQuery().getId());
+
                 try {
                     execute(message);
+                    execute(answerCallbackQuery);
                 } catch (TelegramApiException e) {
                     LOGGER.error("Si e' verificato un errore del tipo: " + e.getLocalizedMessage());
                     e.printStackTrace();

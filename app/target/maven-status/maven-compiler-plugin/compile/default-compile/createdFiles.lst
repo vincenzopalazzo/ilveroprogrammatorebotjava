@@ -1,5 +1,5 @@
-top/gigabox/ilveroprogrammatore/modello/IlVeroProgrammatoreBot.class
 top/gigabox/ilveroprogrammatore/modello/Archivio.class
+top/gigabox/ilveroprogrammatore/vista/IlVeroProgrammatoreBot.class
 top/gigabox/ilveroprogrammatore/persistenza/DAOGenericoJson$1.class
 top/gigabox/ilveroprogrammatore/modello/StatusGenerazione.class
 top/gigabox/ilveroprogrammatore/modello/Modello.class

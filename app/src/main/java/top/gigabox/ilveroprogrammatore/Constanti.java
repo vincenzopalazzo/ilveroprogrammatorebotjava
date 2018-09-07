@@ -33,7 +33,7 @@ public class Constanti {
 
     //Setting Bot
     public static final String NOME_BOT = "ilVeroProgrammatore_bot";
-    public static final String TOKEN_BOT = "Your_Token_Bot";
+    public static final String TOKEN_BOT = "il tuo token";
 
 
     //Arrai contenente caratteri supportati dal bot
