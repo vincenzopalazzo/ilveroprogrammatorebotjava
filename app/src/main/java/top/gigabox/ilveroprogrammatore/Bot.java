@@ -23,7 +23,7 @@ import org.telegram.telegrambots.meta.generics.BotSession;
 import top.gigabox.ilveroprogrammatore.modello.*;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOFrasi;
 import top.gigabox.ilveroprogrammatore.persistenza.DAOGenericoJson;
-import top.gigabox.ilveroprogrammatore.vista.IlVeroProgrammatoreBot;
+import top.gigabox.ilveroprogrammatore.controllo.IlVeroProgrammatoreBot;
 
 import java.io.File;
 import java.util.ArrayList;

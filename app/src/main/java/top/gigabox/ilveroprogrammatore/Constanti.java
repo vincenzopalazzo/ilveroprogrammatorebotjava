@@ -20,8 +20,8 @@ package top.gigabox.ilveroprogrammatore;
  */
 
 public class Constanti {
-    //TODO Gestire meglio i percorsi, generallizarli sopratutto
-    public static final String PERCORSO_DIRECTORY_DATI = "/home/pi/dati/";
+
+    public static final String PERCORSO_DIRECTORY_DATI = System.getProperty("user.home") + "/dati/";
     public static final String BOT_SESSION = PERCORSO_DIRECTORY_DATI + "bootSession.json";
     public static final String SAVE_MODEL = PERCORSO_DIRECTORY_DATI;
     //public static final String SAVE_ARCHIVIE = PERCORSO_DIRECTORY_DATI + "/archivio.json";
@@ -33,8 +33,9 @@ public class Constanti {
 
     //Setting Bot
     public static final String NOME_BOT = "ilVeroProgrammatore_bot";
-    public static final String TOKEN_BOT = "il tuo token";
+    public static final String TOKEN_BOT = "243429243:AAFjSjMhcGzxGp6d2gqmlyvRhq2thLPSpTI";
 
-
-    //Arrai contenente caratteri supportati dal bot
+    //CallbackQuery
+   public static final String INFO_SVILUPPO = "messaggio_info_sviluppo";
+   public static final String ABILITA = "cosa_so_fare";
 }

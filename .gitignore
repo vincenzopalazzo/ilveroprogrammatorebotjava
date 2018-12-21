@@ -4,8 +4,12 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
+#costurctor file
+initMavenproject.sh
+
+#directory
+.idea/
+app/target
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

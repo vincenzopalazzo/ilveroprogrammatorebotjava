@@ -1,0 +1,7 @@
+------- 22/12/2018 --------
+Inizio refactorin.
+    - Inizio applicazione pattern Chain Of Responsability.
+
+--- Da dove ricominciare ---
+    -- 22/12/2018 --
+        - Ho applicato il patter chain alle principali callback query, credo che sia meglioproseguire con messaggio testuali (hasMessage.)

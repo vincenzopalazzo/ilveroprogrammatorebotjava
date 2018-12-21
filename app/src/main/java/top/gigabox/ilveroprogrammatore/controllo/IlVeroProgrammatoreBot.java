@@ -1,28 +1,30 @@
 /**
  * MIT License
  * Copyright (c) 2017 Palazzo Vincenzo vincenzopalazzo1996@gmail.com
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
  * (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, m
  * erge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to
  * do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
  * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package top.gigabox.ilveroprogrammatore.vista;
+package top.gigabox.ilveroprogrammatore.controllo;
 
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import top.gigabox.ilveroprogrammatore.Bot;
 import top.gigabox.ilveroprogrammatore.Constanti;
@@ -33,6 +35,7 @@ import top.gigabox.ilveroprogrammatore.modello.Utenti;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @author https://github.com/vincenzopalazzo
  */
@@ -53,6 +56,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+
         //Creazione tastiera
         InlineKeyboardMarkup tastiera = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> bottonis = new ArrayList<>();
@@ -121,6 +125,8 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
+
+            //TODO il refactoring e' arrivato fino a qui, credo che questo ha bisogno di maggiore riflessione.
             if (update.getCallbackQuery().getData().equals("add_voto_minus") || update.getCallbackQuery().getData().equals("add_voto_plus")) {
                 generaVotazione(update);
             }
@@ -184,7 +190,7 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
                 SendMessage message = new SendMessage();
                 String messaggio = new String();
                 //Il messaggio arriva da un comando invocato con il tasto /
-                if(isComandoBot(update.getMessage().getText())){
+                if (isComandoBot(update.getMessage().getText())) {
                     messaggio = "Ciao, mi hai chiamanto usando i comandi del bot che iniziano per /qualcosa, mio padre pensa che sia una funzione un po" +
                             "vecchia e quinid mi ha istruito a rispondere attraverso messaggi naturali.\n" +
                             "Ora se sei in un gruppo prova a scrivere 'Ciao @ilVeroProgrammatore_bot' e io ti rispondero'.\n " +
@@ -274,17 +280,17 @@ public class IlVeroProgrammatoreBot extends TelegramLongPollingBot {
             message.setText(messaggio);
             message.setChatId(chatId);
             execute(message);
-        }catch (TelegramApiException tae){
+        } catch (TelegramApiException tae) {
             LOGGER.error("Si e' verificato un errore del tipo: " + tae.getLocalizedMessage());
             tae.printStackTrace();
         }
     }
 
     private boolean isComandoBot(String text) {
-        if(text.trim().equals("/hey@ilVeroProgrammatore_bot")){
+        if (text.trim().equals("/hey@ilVeroProgrammatore_bot")) {
             return true;
         }
-        if(text.trim().equals("/hey")){
+        if (text.trim().equals("/hey")) {
             return true;
         }
         return false;

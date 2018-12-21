@@ -60,8 +60,8 @@ public class DAOFrasi implements IDAOFrasi{
         return frasi;
     }
 
+    //TODO (BUG) non copre tutti i casi, trovare una strada migliore
     private static String unicodePaserse(String string){
-        //TODO manca guardia
         Map<String, String> caratteriUnicode = new HashMap<>();
         caratteriUnicode.put("90�", "90 gradi");
         caratteriUnicode.put("�", "");
